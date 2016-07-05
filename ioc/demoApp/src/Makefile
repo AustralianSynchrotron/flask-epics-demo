@@ -1,42 +1,27 @@
 TOP=../..
 
 include $(TOP)/configure/CONFIG
-#----------------------------------------
-#  ADD MACRO DEFINITIONS AFTER THIS LINE
-#=============================
+PROD_NAME = demo
+PROD_IOC = $(PROD_NAME)
+DBD += $(PROD_NAME).dbd
 
-#=============================
-# Build the IOC application
+$(PROD_NAME)_DBD += base.dbd
 
-PROD_IOC = demo
-# demo.dbd will be created and installed
-DBD += demo.dbd
+$(PROD_NAME)_DBD += commonDriverSupport.dbd
 
-# demo.dbd will be made up from these files:
-demo_DBD += base.dbd
+PROD_LIBS               += NDPlugin ADBase netCDF
+PROD_LIBS               += asyn calc busy sscan autosave
+PROD_LIBS               += $(EPICS_BASE_IOC_LIBS)
 
-# Include dbd files from all support applications:
-#demo_DBD += xxx.dbd
+$(PROD_NAME)_DBD += simDetectorSupport.dbd
+PROD_LIBS += simDetector
 
-# Add all the support libraries needed by this IOC
-#demo_LIBS += xxx
+$(PROD_NAME)_DBD += ffmpegServer.dbd
+PROD_LIBS += ffmpegServer
 
-# demo_registerRecordDeviceDriver.cpp derives from demo.dbd
-demo_SRCS += demo_registerRecordDeviceDriver.cpp
+$(PROD_NAME)_SRCS += $(PROD_NAME)_registerRecordDeviceDriver.cpp
+$(PROD_NAME)_SRCS_DEFAULT += $(PROD_NAME)Main.cpp
 
-# Build the main IOC entry point on workstation OSs.
-demo_SRCS_DEFAULT += demoMain.cpp
-demo_SRCS_vxWorks += -nil-
-
-# Add support from base/src/vxWorks if needed
-#demo_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
-
-# Finally link to the EPICS Base libraries
-demo_LIBS += $(EPICS_BASE_IOC_LIBS)
-
-#===========================
+$(PROD_NAME)_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 include $(TOP)/configure/RULES
-#----------------------------------------
-#  ADD RULES AFTER THIS LINE
-
