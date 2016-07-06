@@ -1,0 +1,22 @@
+version: '2'
+services:
+  ioc:
+    build:
+      context: .
+      dockerfile: ioc.dockerfile
+    tty: true
+    hostname: localhost
+    ports:
+      - "5064:5064"
+      - "5064:5064/udp"
+      - "5065:5065"
+      - "5065:5065/udp"
+      - "8000:8000"
+  app:
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    environment:
+      EPICS_CA_ADDR_LIST: ioc
+    ports:
+      - "5000:5000"
