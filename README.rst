@@ -30,11 +30,11 @@ Walkthrough for constructing the app
    * Python 3 (we recommend getting it via the `Anaconda
      <https://www.continuum.io/downloads>`_ package)
    * `EPICS base <http://www.aps.anl.gov/epics/base/R3-14/12.php>`_ (if on
-     Linux/Mac; not need on Windows)
+     Linux/Mac; not needed on Windows)
 
 2. Download this repo and in the project folder start the simulation detector IOC with::
 
-      docker-compose up ioc -d
+      docker-compose up -d ioc
 
 3. Create a new folder called ``webdetector``. Inside this folder create a file
    called ``requirements.txt``. This is where we will list the dependencies of this
