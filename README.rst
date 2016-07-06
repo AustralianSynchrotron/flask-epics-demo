@@ -43,8 +43,8 @@ Walkthrough for constructing the app
 
       pip3 install -r requirements.txt
 
-4. Create a file called ``app.py`` that imports Flask, makes a single route and
-   returns some text:
+4. Create a file called ``app.py`` that imports Flask and defines a single
+   route which returns the text "Hello World!":
 
    .. code-block:: python
 
@@ -63,12 +63,12 @@ Walkthrough for constructing the app
 
       python3 app.py
 
-   Once you start the app, if you open http://localhost:5000/ in a browser you
-   will see the text being outputted by the index view function.
+   Once the app is running, if you open http://localhost:5000/ in a browser you
+   will see the text being outputted by the ``index`` view function.
 
-6. To interact with the simulation detector we will create a PyEPICS device. First
-   we should add pyepics as a dependency and install it. Update ``requirements.txt``
-   to read::
+6. To interact with the simulation detector we will create a PyEPICS device.
+   First we should add pyepics as a dependency and install it. Update
+   ``requirements.txt`` to read::
 
       Flask
       pyepics
@@ -93,7 +93,7 @@ Walkthrough for constructing the app
                               })
 
 8. Instead of returning the string ``'Hello World!'`` let's make the route return
-   the model of the detector:
+   the model name of the detector:
 
    .. code-block:: python
 
@@ -101,17 +101,17 @@ Walkthrough for constructing the app
       def index():
           return detector.model
 
-9. After making these changes the server should restart automatically because we
-   are in debug mode (see the ``app.run(debug=True)`` line). Reload
-   http://localhost:5000/ in your browser and you will see "Basic simulator" as
-   that is the model of our "detector".
+9. After making these changes the server should restart automatically because
+   we told it to run in debug mode with ``app.run(debug=True)`` in ``app.py``.
+   Reload http://localhost:5000/ in your browser and you will see "Basic
+   simulator" as that is the model of our "detector".
 
-
-10. Instead of returning plain text we wish to return a HTML page which will allow
-    us to embed the video stream of the camera and add widgets for controlling it.
-    Flask makes this easy through it's ``render_template`` function, which takes
-    the filename of a Jinja2 html template that is expected to be in a folder named
-    ``templates``. Create simple template at ``templates/index.html``:
+10. Instead of returning plain text we wish to return a HTML page which will
+    allow us to embed the video stream of the camera and add widgets for
+    controlling it. Flask makes this easy through it's ``render_template``
+    function, which takes the filename of a Jinja2 html template that is
+    expected to be in a folder named ``templates``. Create simple template at
+    ``templates/index.html``:
 
     .. code-block:: html
 
@@ -152,12 +152,12 @@ Walkthrough for constructing the app
     If you reload http://localhost:5000/ the detector model will now be a large
     heading.
 
-11. To add the detector video stream to our web page we need the url of the mjpeg
-    stream. This is given by the PV connected to ``detector.video_url``. Unfortunately,
-    because this PV is a character array, PyEPICS will return it as a list of
-    integers. To force it to return the url as a string we need to call
-    ``detector.get('video_url', as_string=True)``. We do this inside our view function
-    and then supply the result to the template:
+11. To add the detector video stream to our web page we need the url of the
+    mjpeg stream. This is given by the PV connected to ``detector.video_url``.
+    Unfortunately, because this PV is a character array, PyEPICS will return it
+    as a list of integers. To force it to return the url as a string we need to
+    call ``detector.get('video_url', as_string=True)``. We do this inside our
+    view function and then supply the result to the template:
 
     .. code-block:: python
 
@@ -166,7 +166,8 @@ Walkthrough for constructing the app
            video_url = detector.get('video_url', as_string=True)
            return render_template('index.html', detector=detector, video_url=video_url)
 
-    Then in our ``index.html`` file we add the video stream using the ``<img>`` tag:
+    Then in our ``index.html`` file we add the video stream using the ``<img>``
+    tag:
 
     .. code-block:: html
 
@@ -206,9 +207,9 @@ Walkthrough for constructing the app
 
 13. In ``app.py``, add a function to handle POST requests to ``/configure``. We
     also need to import the special ``request`` object that gives us access to
-    the data the user send through in their POST request. We also import the sleep
-    function and add a short delay after setting the detector gain to give
-    EPICS time to process the change.
+    the data the user send through in their POST request. We also import the
+    sleep function and add a short delay after setting the detector gain to
+    give EPICS time to process the change.
 
     .. code-block:: python
 
@@ -230,9 +231,9 @@ Walkthrough for constructing the app
     Now when you enter a new gain value on the web page and hit submit the gain
     will be set and you will get a "configured!" message.
 
-14. It would be better if after configuring the detector users are redirected back
-    to the main page. We can do this by importing the Flask redirect function
-    and calling it from the ``configure`` function:
+14. It would be better if after configuring the detector users are redirected
+    back to the main page. We can do this by importing the Flask redirect
+    function and calling it from the ``configure`` function:
 
     .. code-block:: python
 
@@ -251,8 +252,8 @@ Walkthrough for constructing the app
 
        [...]
 
-15. Another control we might want is to be able to start and stop the detector. We
-    can do this by adding a checkbox to our form:
+15. Another control we might want is to be able to start and stop the detector.
+    We can do this by adding a checkbox to our form:
 
     .. code-block:: html
 
@@ -304,7 +305,8 @@ Walkthrough for constructing the app
        pip3 install -r requirements.txt
 
     then to use it we import and create an instance of the ``HTTPBasicAuth``
-    class and then define a function to return passwords for a supplied username:
+    class and then define a function to return passwords for a supplied
+    username:
 
     .. code-block:: python
 
@@ -330,7 +332,7 @@ Walkthrough for constructing the app
 
        [...]
 
-    Then to require a password on our ``configure`` function we just apply the
+    To require a password on our ``configure`` function we just apply the
     ``@auth.login_required`` decorator:
 
     .. code-block:: python
@@ -362,8 +364,8 @@ Walkthrough for constructing the app
        Flask-Bootstrap
        pyepics
 
-    and run ``pip3 install -r requirements.txt``. Then apply Bootstrap to our app
-    object like so:
+    and run ``pip3 install -r requirements.txt``. Then apply Bootstrap to our
+    app object like so:
 
     .. code-block:: python
 
@@ -379,10 +381,10 @@ Walkthrough for constructing the app
        auth = HTTPBasicAuth()
        Bootstrap(app)
 
-    Then we update our ``index.html`` template to inherit from the
-    ``bootstrap/base.html`` template. We move our code into the ``content`` block
-    and add a few html classes that bootstrap uses to style our page. The entire
-    contents of ``index.html`` file should be replaced with:
+    Next we update our ``index.html`` template to inherit from the
+    ``bootstrap/base.html`` template. We move our code into the ``content``
+    block and add a few html classes that bootstrap uses to style our page. The
+    entire contents of ``index.html`` should be replaced with:
 
     .. code-block:: html
 
