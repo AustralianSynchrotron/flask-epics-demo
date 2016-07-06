@@ -14,7 +14,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', detector=detector)
+    video_url = detector.get('video_url', as_string=True)
+    return render_template('index.html', detector=detector, video_url=video_url)
 
 
 if __name__ == '__main__':
