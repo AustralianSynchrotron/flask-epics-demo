@@ -1,7 +1,8 @@
 from time import sleep
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import epics
+
 
 detector = epics.Device(prefix='SR00DEMO01:', mutable=False,
                         aliases={
@@ -25,7 +26,7 @@ def configure():
     data = request.form
     detector.gain = float(data['gain'])
     sleep(.1)
-    return 'configured!'
+    return redirect('/')
 
 
 if __name__ == '__main__':
