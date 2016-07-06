@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import epics
 
 detector = epics.Device(prefix='SR00DEMO01:', mutable=False,
@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return detector.model
+    return render_template('index.html', detector=detector)
 
 
 if __name__ == '__main__':
