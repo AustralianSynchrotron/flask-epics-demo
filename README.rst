@@ -41,7 +41,7 @@ Walkthrough for constructing the app
    application. The first dependency to add is Flask so add it to the ``requirements.txt``
    file and then run::
 
-      pip install -r requirements.txt
+      pip3 install -r requirements.txt
 
 4. Create a file called ``app.py`` that imports Flask, makes a single route and
    returns some text:
@@ -75,7 +75,7 @@ Walkthrough for constructing the app
 
    and install pyepics with::
 
-      pip install -r requirements.txt
+      pip3 install -r requirements.txt
 
 7. In ``app.py`` import pyepics and create a detector device by adding the
    following to the top of the file (just below ``from flask import Flask``):
@@ -301,7 +301,7 @@ Walkthrough for constructing the app
 
     and install it::
 
-       pip install -r requirements.txt
+       pip3 install -r requirements.txt
 
     then to use it we import and create an instance of the ``HTTPBasicAuth``
     class and then define a function to return passwords for a supplied username:
@@ -362,7 +362,7 @@ Walkthrough for constructing the app
        Flask-Bootstrap
        pyepics
 
-    and run ``pip install -r requirements.txt``. Then apply Bootstrap to our app
+    and run ``pip3 install -r requirements.txt``. Then apply Bootstrap to our app
     object like so:
 
     .. code-block:: python
