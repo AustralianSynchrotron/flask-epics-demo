@@ -2,6 +2,11 @@
 <html lang="en">
 <body>
   <h1>{{ detector.model }}</h1>
+  <form method="POST" action="/configure">
+    <input name="gain" value="{{ detector.gain }}"/>
+    <button type="submit">Configure Detector</button>
+  </form>
+  <br/>
   <img src="{{ video_url }}"/>
 </body>
 </html>
