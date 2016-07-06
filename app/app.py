@@ -1,6 +1,7 @@
 from time import sleep
 
 from flask import Flask, render_template, request, redirect
+from flask_httpauth import HTTPBasicAuth
 import epics
 
 
@@ -13,6 +14,12 @@ detector = epics.Device(prefix='SR00DEMO01:', mutable=False,
                         })
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+
+@auth.get_password
+def get_password(username):
+    return '1234'
 
 
 @app.route('/')
@@ -22,6 +29,7 @@ def index():
 
 
 @app.route('/configure', methods=['POST'])
+@auth.login_required
 def configure():
     data = request.form
     detector.gain = float(data['gain'])
