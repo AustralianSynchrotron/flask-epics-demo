@@ -25,6 +25,7 @@ def index():
 def configure():
     data = request.form
     detector.gain = float(data['gain'])
+    detector.acquire = 1 if 'acquire' in data else 0
     sleep(.1)
     return redirect('/')
 

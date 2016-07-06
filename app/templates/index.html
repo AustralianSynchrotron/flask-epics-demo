@@ -3,7 +3,13 @@
 <body>
   <h1>{{ detector.model }}</h1>
   <form method="POST" action="/configure">
-    <input name="gain" value="{{ detector.gain }}"/>
+    <label>Gain:
+      <input name="gain" value="{{ detector.gain }}"/>
+    </label>
+    <label>
+      <input type="checkbox" name="acquire"
+             {% if detector.acquire %}checked{% endif %}/> Acquire
+    </label>
     <button type="submit">Configure Detector</button>
   </form>
   <br/>
