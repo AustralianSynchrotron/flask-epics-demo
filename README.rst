@@ -1,10 +1,10 @@
 Flask-EPICS Demo
 ================
 
-This app was created as part of a seminar on Flask at the Australian Synchrotron.
+A demonstration of how to build a simple Flask web interface to an EPICS
+areaDetector IOC.
 
-It demonstrates how to control an EPICS areaDetector IOC through a simple Flask
-web interface.
+.. image:: screenshot.png
 
 
 To run the application in Docker
