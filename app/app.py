@@ -2,6 +2,7 @@ from time import sleep
 
 from flask import Flask, render_template, request, redirect
 from flask_httpauth import HTTPBasicAuth
+from flask_bootstrap import Bootstrap
 import epics
 
 
@@ -15,6 +16,10 @@ detector = epics.Device(prefix='SR00DEMO01:', mutable=False,
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+Bootstrap(app)
+
+# Needed after Flask-Bootstrap is added to preserve auto-reload functionality
+app.jinja_env.auto_reload = True
 
 
 @auth.get_password

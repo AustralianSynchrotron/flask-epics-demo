@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-  <h1>{{ detector.model }}</h1>
-  <form method="POST" action="/configure">
-    <label>Gain:
-      <input name="gain" value="{{ detector.gain }}"/>
-    </label>
-    <label>
-      <input type="checkbox" name="acquire"
-             {% if detector.acquire %}checked{% endif %}/> Acquire
-    </label>
-    <button type="submit">Configure Detector</button>
-  </form>
-  <br/>
-  <img src="{{ video_url }}"/>
-</body>
-</html>
+{% extends 'bootstrap/base.html' %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>{{ detector.model }}</h1>
+    <form method="POST" action="/configure" class="form-inline">
+      <label>Gain:
+        <input name="gain" value="{{ detector.gain }}"
+               class="form-control"/>
+      </label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="acquire"
+                 {% if detector.acquire %}checked{% endif %}/> Acquire
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Configure Detector</button>
+    </form>
+    <br/>
+    <img src="{{ video_url }}" class="img-responsive"/>
+  </div>
+
+{% endblock %}
