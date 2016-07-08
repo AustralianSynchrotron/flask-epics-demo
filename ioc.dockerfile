@@ -3,4 +3,4 @@ COPY ioc /ioc
 RUN cd /ioc && make
 WORKDIR /ioc/iocBoot/iocdemo
 EXPOSE 5064 5064/udp 5065 5065/udp 8000
-CMD ["./st.cmd"]
+CMD ["/ioc/bin/linux-x86_64/demo", "st.cmd"]
