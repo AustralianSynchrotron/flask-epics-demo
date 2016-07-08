@@ -7,18 +7,20 @@ areaDetector IOC.
 .. image:: screenshot.png
 
 
-To run the application in Docker
---------------------------------
+Introduction
+------------
 
-1. Install `Docker <https://docs.docker.com/>`_.
-2. Download this repository.
-3. From inside the project folder run::
+This repo contains two `Docker <https://docs.docker.com/>`_ files:
 
-      docker-compose up -d
+* ``ioc.dockerfile`` to run an areaDetector IOC used by the Flask app
+* ``app.dockerfile`` to run a completed version of the Flask app
 
-The first time you run this it may take a few minutes to download the docker
-images it needs. Once this is done you will be able to access the site at
-http://localhost:5000/.
+Docker containers based on these files can be started and stopped with
+``docker-compose`` which will also open the appropriate ports you will need.
+
+Below are step-by-step instructions for creating the app. If you want to jump
+to a finished product, see the "Run a pre-build version of the app in Docker"
+section below.
 
 
 Walkthrough for constructing the app
@@ -62,6 +64,8 @@ Walkthrough for constructing the app
 5. Start the app with::
 
       python3 app.py
+
+   (If you are on Windows, replace ``python3`` with ``python``.)
 
    Once the app is running, if you open http://localhost:5000/ in a browser you
    will see the text being outputted by the ``index`` view function.
@@ -415,3 +419,17 @@ Walkthrough for constructing the app
 
     Reload the page and everything should look a little prettier and will now
     look great on mobiles and tablets.
+
+
+Run a pre-build version of the app in Docker
+--------------------------------------------
+
+1. Install `Docker <https://docs.docker.com/>`_.
+2. Download this repository.
+3. From inside the project folder run::
+
+      docker-compose up -d
+
+The first time you run this it may take a few minutes to download the docker
+images it needs. Once this is done you will be able to access the site at
+http://localhost:5000/.
