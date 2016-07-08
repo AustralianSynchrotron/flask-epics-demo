@@ -40,10 +40,14 @@ Walkthrough for constructing the app
 
 3. Create a new folder called ``webdetector``. Inside this folder create a file
    called ``requirements.txt``. This is where we will list the dependencies of this
-   application. The first dependency to add is Flask so add it to the ``requirements.txt``
-   file and then run::
+   application. Our first dependency is Flask itself. Add the word ``Flask`` to
+   the ``requirements.txt`` file and run::
 
       pip3 install -r requirements.txt
+
+   This will install the latest version of Flask. If you are on Linux or Mac and
+   there is a permission error you may need to run
+   "``sudo pip3 install -r requirements.txt``" instead.
 
 4. Create a file called ``app.py`` that imports Flask and defines a single
    route which returns the text "Hello World!":
